@@ -28,7 +28,7 @@ pipeline {
                             "files": [
                                 {
                                     "pattern": "jenkins",
-                                    "target": "https://rdevsecops64.jfrog.io/artifactory/jenkins/                                }
+                                    "target": "https://rdevsecops64.jfrog.io/artifactory/jenkins/"                              }
                             ]
                         }
                     """
