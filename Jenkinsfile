@@ -6,11 +6,12 @@ pipeline {
    stages{
     stage('CompileandRunSonarAnalysis') {
             steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-sonar-ci_pipeline -Dsonar.organization=jenkins-sonar-ci -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6b97f056496f86ba20857ab4349e4ae20fd980a1'
+		sh 'mkdir -p sonar'    
+		sh 'mvn clean verify -l sonar/log.txt sonar:sonar -Dsonar.projectKey=jenkins-sonar-ci_pipeline -Dsonar.organization=jenkins-sonar-ci -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6b97f056496f86ba20857ab4349e4ae20fd980a1'
 		}
             post {
                always {
-               archiveArtifacts artifacts: '.sonar/cache'
+               archiveArtifacts artifacts: 'sonar/log.txt'
              }
          }
       } 
@@ -26,7 +27,7 @@ pipeline {
                         {
                             "files": [
                                 {
-                                    "pattern": ".sonar/",
+                                    "pattern": "sonar/log.txt",
                                     "target": "https://rdevsecops64.jfrog.io/artifactory/1264/"
                                 }
                             ]
