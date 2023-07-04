@@ -9,15 +9,22 @@ pipeline {
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-sonar-ci_pipeline -Dsonar.organization=jenkins-sonar-ci -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6b97f056496f86ba20857ab4349e4ae20fd980a1'
 			}
         } 
-    stage('jfrogartifacts') {
-      steps{ 
-            rtServer (
-                  id: 'artifactory',
-                  url: 'https://rdevsecops64.jfrog.io/artifactory',
-                  username: 'admin',
-                  password: 'Admin@1264'
-        )
-      }
+
+        
+    stage ('Upload file') {
+            steps {
+                rtUpload (
+                    // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
+                    serverId: artifactory,
+                    spec: """{
+                            "files": [
+                                    {
+                                       "target": "libs-snapshot-local"
+                                    }
+                                ]
+                            }"""
+                )
+            }
+        }
     }
-  }
-}        
+}
