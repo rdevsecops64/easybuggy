@@ -28,7 +28,7 @@ pipeline {
                             "files": [
                                 {
                                     "pattern": "sonar/log.txt",
-                                    "target": "https://rdevsecops64.jfrog.io/artifactory/1264/"
+                                    "target": "https://rdevsecops64.jfrog.io/artifactory/jenkins/"
                                 }
                             ]
                         }
