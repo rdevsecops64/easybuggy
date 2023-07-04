@@ -26,7 +26,7 @@ pipeline {
                         {
                             "files": [
                                 {
-                                    "pattern": "*/.zip",
+                                    "pattern": "**/*",
                                     "target": "https://rdevsecops64.jfrog.io/artifactory/1264/"
                                 }
                             ]
