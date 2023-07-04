@@ -8,7 +8,13 @@ pipeline {
             steps {	
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-sonar-ci_pipeline -Dsonar.organization=jenkins-sonar-ci -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6b97f056496f86ba20857ab4349e4ae20fd980a1'
             }
-      } 
+        } 
+
+    post {
+        always {
+            archiveArtifacts artifacts: '*',
+        }
+    }
     
     stage('Publish SonarCloud Logs to Artifactory') {
             steps {
@@ -21,6 +27,7 @@ pipeline {
                         {
                             "files": [
                                 {
+                                    "pattern": "*",
                                     "target": "https://rdevsecops64.jfrog.io/artifactory/api/maven/1264"
                                 }
                             ]
