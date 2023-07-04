@@ -12,7 +12,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: '*',
+            archiveArtifacts artifacts: '*'
         }
     }
     
