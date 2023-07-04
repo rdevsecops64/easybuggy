@@ -26,7 +26,7 @@ pipeline {
                         {
                             "files": [
                                 {
-                                    "pattern": ".sonar/cache",
+                                    "pattern": ".sonar/",
                                     "target": "https://rdevsecops64.jfrog.io/artifactory/1264/"
                                 }
                             ]
