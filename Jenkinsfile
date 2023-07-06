@@ -30,8 +30,8 @@ pipeline {
                     // Upload Artifact to Artifactory
                     server.upload(uploadSpec, buildInfo)
                     // Add build information
-                    buildInfo.name = 'pipeline1'
-                    buildInfo.number = '32'
+                    buildInfo.name = 'easybuggy'
+                    buildInfo.number = '2'
 
                     // Publish build information to Artifactory
                     server.publishBuildInfo(buildInfo)                    
@@ -44,8 +44,8 @@ pipeline {
                     def server = Artifactory.server('artifactory')
                     
                     def scanConfig = [
-                        buildName: 'pipeline1',
-                        buildNumber: '32',
+                        buildName: 'easybuggy',
+                        buildNumber: '2',
                         failBuild: false
                     ]
                     
