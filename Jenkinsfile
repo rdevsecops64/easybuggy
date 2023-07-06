@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools { 
-        maven 'Maven_3_5_2'  
+        maven 'Maven_3_8_6'  
     }
    stages{
     stage('CompileandRunSonarAnalysis') {
@@ -27,8 +27,8 @@ pipeline {
                         {
                             "files": [
                                 {
-                                    "pattern": "jenkins",
-                                    "target": "https://rdevsecops64.jfrog.io/artifactory/jenkins/"                              }
+                                    "pattern": "target/*.jar",
+                                    "target": "default-libs-release"                              }
                             ]
                         }
                     """
