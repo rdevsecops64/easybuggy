@@ -137,9 +137,7 @@
      			 <executions>
        			 <execution>          
           		<configuration>            
-           		 <publisher>
-             	 <contextUrl>https://rdevsecops64.jfrog.io/artifactory/1264</contextUrl>
-            	  <repoKey>jenkins</repoKey>              
+           		 <publisher>             
             	</publisher>
          		 </configuration>
         		</execution>
