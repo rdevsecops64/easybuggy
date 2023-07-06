@@ -21,7 +21,7 @@ pipeline {
                             "files": [
                                 {
                                     "pattern": "target/easybuggy.jar",
-                                    "target": "1264"                              }
+                                    "target": "default-generic-local"                              }
                             ]
                         }
                     """
