@@ -4,32 +4,56 @@ pipeline {
         maven 'Maven_3_8_6'  
     }
    stages{
-    stage('CompileandRunSonarAnalysis') {
-            steps {	 
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-sonar-ci_pipeline -Dsonar.organization=jenkins-sonar-ci -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6b97f056496f86ba20857ab4349e4ae20fd980a1'
-		}
-      } 
-    stage('Publish SonarCloud Logs to Artifactory') {
+        stage('CompileandRunSonarAnalysis') {
+            steps {
+        sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-sonar-ci_pipeline -Dsonar.organization=jenkins-sonar-ci -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6b97f056496f86ba20857ab4349e4ae20fd980a1'        	
+		  }     
+        }
+        stage('Publish to Artifactory') {
             steps {
                 script {
                     // Configure Artifactory details
                     def server = Artifactory.server('artifactory')
-
-                    // Define the Artifactory upload specification for SonarCloud logs
+                    def buildInfo = Artifactory.newBuildInfo()
+                    // Define the Artifactory upload specification 
                     def uploadSpec = """
                         {
                             "files": [
                                 {
                                     "pattern": "target/*.jar",
-                                    "target": "default-libs-release"                              }
+                                    "target": "1264"                              }
                             ]
                         }
                     """
+                
 
-                    // Upload SonarCloud logs to Artifactory
-                    server.upload(uploadSpec)
+                    // Upload Artifact to Artifactory
+                    server.upload(uploadSpec, buildInfo)
+                    // Add build information
+                    buildInfo.name = 'java-sample-app-07'
+                    buildInfo.number = '29'
+
+                    // Publish build information to Artifactory
+                    server.publishBuildInfo(buildInfo)                    
                 }
             }
         }
+        stage('Xray Scan') {
+            steps {
+                script {
+                    def server = Artifactory.server('artifactory')
+                    
+                    def scanConfig = [
+                        buildName: 'java-sample-app-07',
+                        buildNumber: '29',
+                        failBuild: false
+                    ]
+                    
+                    def scanResults = server.xrayScan(scanConfig)
+                    
+
+                }
+            }
+        }  
   }
 }
