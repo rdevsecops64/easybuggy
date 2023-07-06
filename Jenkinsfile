@@ -20,7 +20,7 @@ pipeline {
                         {
                             "files": [
                                 {
-                                    "pattern": "target/*.jar",
+                                    "pattern": "target/easybuggy.jar",
                                     "target": "1264"                              }
                             ]
                         }
@@ -30,8 +30,8 @@ pipeline {
                     // Upload Artifact to Artifactory
                     server.upload(uploadSpec, buildInfo)
                     // Add build information
-                    buildInfo.name = 'java-sample-app-07'
-                    buildInfo.number = '29'
+                    buildInfo.name = 'pipeline1'
+                    buildInfo.number = '32'
 
                     // Publish build information to Artifactory
                     server.publishBuildInfo(buildInfo)                    
@@ -44,8 +44,8 @@ pipeline {
                     def server = Artifactory.server('artifactory')
                     
                     def scanConfig = [
-                        buildName: 'java-sample-app-07',
-                        buildNumber: '29',
+                        buildName: 'pipeline1',
+                        buildNumber: '32',
                         failBuild: false
                     ]
                     
