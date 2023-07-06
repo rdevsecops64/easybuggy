@@ -138,9 +138,7 @@
        			 <execution>          
           		<configuration>            
            		 <publisher>
-             	 <contextUrl>https://rdevsecops64.jfrog.io</contextUrl>
-             	 <username>admin</username>
-            	  <password>Admin@1264</password>
+             	 <contextUrl>https://rdevsecops64.jfrog.io/artifactory/1264</contextUrl>
             	  <repoKey>jenkins</repoKey>              
             	</publisher>
          		 </configuration>
