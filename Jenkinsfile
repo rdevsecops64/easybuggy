@@ -50,8 +50,8 @@ pipeline {
                     ]
                     
                     def scanResults = server.xrayScan(scanConfig)
-                    
-
+                    echo scanResults as String
+                    sleep 10
                 }
             }
         }  
